@@ -16,12 +16,16 @@ public abstract class BaseRequest<T> {
 
     BaseRequest(String method) {
         this.method = method;
+        init();
+    }
+
+    private void init() {
         timestamp = System.currentTimeMillis() / 1000;
     }
 
-    abstract protected T fetchRequest();
+//    abstract protected T fetchRequest();
 
-    static class Auth {
+    private static class Auth {
         private @SerializedName("auth_key") String authKey;
         private @SerializedName("role_id") String roleId;
         private @SerializedName("role_version") String roleVersion;
