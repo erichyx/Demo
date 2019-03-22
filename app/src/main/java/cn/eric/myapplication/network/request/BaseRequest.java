@@ -21,9 +21,15 @@ public abstract class BaseRequest<T> {
 
     private void init() {
         timestamp = System.currentTimeMillis() / 1000;
+        if (authIndependent()) {
+            auth = new Auth();
+        }
     }
 
-//    abstract protected T fetchRequest();
+    // 子类根据需要重写该方法
+    protected boolean authIndependent() {
+        return true;
+    }
 
     private static class Auth {
         private @SerializedName("auth_key") String authKey;
