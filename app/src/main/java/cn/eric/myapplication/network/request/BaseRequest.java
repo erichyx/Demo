@@ -1,4 +1,4 @@
-package cn.eric.myapplication.network;
+package cn.eric.myapplication.network.request;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public abstract class BaseRequest<T> {
     private @SerializedName("method") String method;
-    private @SerializedName("version") int version;
-    private @SerializedName("platform") String platform = "Android";
+    private @SerializedName("version") int version = 2;
+    private @SerializedName("platform") String platform = "android";
     private @SerializedName("os") String os;
     private @SerializedName("timestamp") long timestamp;
     private @SerializedName("identifier") String identifier;
@@ -16,10 +16,10 @@ public abstract class BaseRequest<T> {
 
     BaseRequest(String method) {
         this.method = method;
-        timestamp = System.currentTimeMillis();
+        timestamp = System.currentTimeMillis() / 1000;
     }
 
-    abstract T fetchRequest();
+    abstract protected T fetchRequest();
 
     static class Auth {
         private @SerializedName("auth_key") String authKey;

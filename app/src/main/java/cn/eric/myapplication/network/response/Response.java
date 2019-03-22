@@ -1,4 +1,4 @@
-package cn.eric.myapplication.network;
+package cn.eric.myapplication.network.response;
 
 import com.google.gson.annotations.SerializedName;
 

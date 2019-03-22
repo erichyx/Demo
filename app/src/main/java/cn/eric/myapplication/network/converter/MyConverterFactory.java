@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
-import cn.eric.myapplication.network.BaseRequest;
+import cn.eric.myapplication.network.request.BaseRequest;
 import okhttp3.RequestBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -37,9 +37,8 @@ public final class MyConverterFactory extends Converter.Factory {
     public Converter<?, RequestBody> requestBodyConverter(Type type,
                                                           Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         // 如果是BaseRequest的子类，则进行处理
-        if (BaseRequest.class.isAssignableFrom(type.getClass())) {
-            TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-            return new MyRequestBodyConverter<>(gson, adapter);
+        if (BaseRequest.class.isAssignableFrom(getRawType(type))) {
+            return new MyRequestBodyConverter<>(gson);
         }
 
         return null;
