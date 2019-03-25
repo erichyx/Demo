@@ -49,10 +49,6 @@ public class Response<T> {
     }
 
     public static <T> Response<T> error() {
-        return new Response<>("请求失败");
-    }
-
-    public static <T> Response<T> error() {
         return new Response<T>("请求失败");
     }
 

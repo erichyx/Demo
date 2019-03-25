@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class ParamEncipher {
     private static final String SALT = "Htjsq%@)";
 
-    public String decryptKey(String str, String key) {
+    public String decrypt(String str, String key) {
         if (TextUtils.isEmpty(key)) return "";
 
         int keyLen = key.length();

@@ -1,67 +1,67 @@
 package cn.eric.myapplication.api.request.base;
 
-import android.os.Build;
-
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by eric on 2019/3/21
  */
-public class CommonRequest<T> {
-    private @SerializedName("method") String method;
-    private @SerializedName("version") int version = 2;
-    private @SerializedName("platform") String platform = "android";
-    private @SerializedName("os") String os;
-    private @SerializedName("timestamp") long timestamp;
-    private @SerializedName("identifier") String identifier;
+public class CommonRequest<T> extends BaseRequest {
     private @SerializedName("auth") Auth auth;
     private @SerializedName("request") T request;
 
     private CommonRequest(Builder<T> builder) {
-        this.method = builder.method;
+        super(builder.method);
         request = builder.data;
-        init(builder.authIndependent);
+        auth = new Auth(timestamp);
     }
 
-    private void init(boolean authIndependent) {
-        timestamp = System.currentTimeMillis() / 1000;
-        os = "Android " + Build.VERSION.RELEASE;
-        // TODO 调用工具类获取
-        identifier = "d7e4facf-39fc-32f2-975d-c00cb66121a1";
-        if (authIndependent) {
-            auth = new Auth(timestamp);
-        }
-    }
-
-    private static class Auth {
+    static class Auth {
         private @SerializedName("auth_key") String authKey;
         private @SerializedName("role_id") String roleId;
         private @SerializedName("role_version") String roleVersion;
 
         private static ParamEncipher encipher = RequestParamFetcher.get().getParamEncipher();
 
-        public Auth(long timeStamp) {
+        Auth(long timeStamp) {
             // TODO 从配置文件读取
             roleId = "DolphinQ_Mobile_Android";
-            roleVersion = "1.0.1227";
+            roleVersion = "1.5.316";
 
             String originKey = roleId + "-" + roleVersion + "|[" + timeStamp + "]";
             authKey = encipher.encryptAuthKey(originKey);
+        }
+
+        public String getAuthKey() {
+            return authKey;
+        }
+
+        public void setAuthKey(String authKey) {
+            this.authKey = authKey;
+        }
+
+        public String getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(String roleId) {
+            this.roleId = roleId;
+        }
+
+        public String getRoleVersion() {
+            return roleVersion;
+        }
+
+        public void setRoleVersion(String roleVersion) {
+            this.roleVersion = roleVersion;
         }
     }
 
     public static class Builder<T> {
         private String method;
         private T data;
-        private boolean authIndependent = true;
 
         public Builder<T> setMethod(String method) {
             this.method = method;
-            return this;
-        }
-
-        public Builder<T> setAuthIndependent(boolean authIndependent) {
-            this.authIndependent = authIndependent;
             return this;
         }
 

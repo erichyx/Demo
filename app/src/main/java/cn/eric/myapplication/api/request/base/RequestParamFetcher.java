@@ -10,11 +10,15 @@ public final class RequestParamFetcher {
     private ParamEncipher encipher = new ParamEncipher();
 
     public String fetchDecryptKey() {
-        String decryptKey = encipher.decryptKey(DEFAULT_ENCRYPT_KEY,"201901031022");
+        String decryptKey = encipher.decrypt(DEFAULT_ENCRYPT_KEY,"201901031022");
         if (TextUtils.isEmpty(encryptKey)) {
             return decryptKey;
         }
-        return encipher.decryptKey(encryptKey, decryptKey);
+        return encipher.decrypt(encryptKey, decryptKey);
+    }
+
+    public void storeEncryptKey(String encryptKey) {
+        this.encryptKey = encryptKey;
     }
 
     public ParamEncipher getParamEncipher() {

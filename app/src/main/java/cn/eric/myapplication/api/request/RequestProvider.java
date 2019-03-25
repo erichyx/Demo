@@ -9,11 +9,10 @@ public class RequestProvider {
 
     public CommonRequest<ScreenAdReq> getScreenAdReq() {
         return new CommonRequest.Builder<ScreenAdReq>()
-                .setMethod("")
+                .setMethod("screen_advert")
                 .setReqData(new ScreenAdReq())
                 .build();
     }
-
 
     public static RequestProvider getInstance() {
         return RequestProviderHolder.sInstance;

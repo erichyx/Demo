@@ -1,9 +1,7 @@
-package cn.eric.myapplication.uicontroller;
+package cn.eric.basiclib.uicontroller;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;

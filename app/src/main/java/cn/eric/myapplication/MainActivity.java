@@ -6,9 +6,10 @@ import android.view.View;
 
 import cn.eric.basiclib.utils.ViewModelUtils;
 import cn.eric.myapplication.databinding.ActivityMainBinding;
-import cn.eric.myapplication.uicontroller.BaseActivity;
+import cn.eric.basiclib.uicontroller.BaseActivity;
 import cn.eric.myapplication.utils.InjectorUtils;
 import cn.eric.myapplication.utils.ResultUtil;
+import cn.eric.myapplication.utils.ToastUtil;
 import cn.eric.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
@@ -31,15 +32,26 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void subscribeUi() {
-        mViewModel.getAdResult().observe(this, response -> {
+        mViewModel.getEncryptKeyResult().observe(this, response -> {
+            ResultUtil.showResult(this, response, data -> {
+                mViewDataBinding.tvResult.setText(data.getAuthKey());
+            });
+        });
+
+        mViewModel.getScreenAdResult().observe(this, response -> {
             ResultUtil.showResult(this, response, data -> {
                 Log.d("dolphin", data.toString());
+                ToastUtil.showToast(this, "请求成功");
             });
         });
     }
 
-    public void onRequestClick(View view) {
-        mViewModel.fetchAd();
+    public void onRequestAuthKeyClick(View view) {
+        mViewModel.fetchAuthKey();
+    }
+
+    public void onRequestScreenAdClick(View view) {
+        mViewModel.fetchScreenAd();
     }
 
 }
