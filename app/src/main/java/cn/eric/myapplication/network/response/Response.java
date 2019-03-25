@@ -32,6 +32,10 @@ public class Response<T> {
         return false;
     }
 
+    public static <T> Response<T> error() {
+        return new Response<T>("请求失败");
+    }
+
     public static <T> Response<T> error(String msg) {
         return new Response<T>(msg);
     }

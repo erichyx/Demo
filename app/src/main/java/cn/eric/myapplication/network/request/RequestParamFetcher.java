@@ -5,7 +5,7 @@ import android.text.TextUtils;
 public final class RequestParamFetcher {
     private RequestParamFetcher() {}
 
-    private final String DEFAULT_ENCRYPT_KEY = "elFYTUVfcAEBAh8AEw==";
+    private static final String DEFAULT_ENCRYPT_KEY = "elFYTUVfcAEBAh8AEw==";
     private String encryptKey;
     private ParamEncipher encipher = new ParamEncipher();
 
