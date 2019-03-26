@@ -27,7 +27,7 @@ public final class DolphinRepo {
     }
 
     public void fetchEncryptKey(final MutableLiveData<Response<EncryptKeyResp>> result) {
-        api.fetchEncryptKey(new EncryptKeyRequest()).subscribeOn(Schedulers.io())
+        api.fetchEncryptKey(new EncryptKeyRequest())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseSingleObserver<Response<EncryptKeyResp>>() {
                     @Override
@@ -45,8 +45,7 @@ public final class DolphinRepo {
 
     public void fetchScreenAd(final MutableLiveData<Response<ScreenAdResp>> result) {
         CommonRequest<ScreenAdReq> screenAdReq = RequestProvider.getInstance().getScreenAdReq();
-        api.fetchScreeAd(screenAdReq).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        api.fetchScreeAd(screenAdReq).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseSingleObserver<Response<ScreenAdResp>>() {
                     @Override
                     public void onSuccess(Response<ScreenAdResp> response) {
