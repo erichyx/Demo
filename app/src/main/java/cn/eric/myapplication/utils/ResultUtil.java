@@ -13,9 +13,9 @@ public class ResultUtil {
         void onSuccess(T data);
     }
 
-    public static <T> void showResult(Context context, Response<T> resp, SuccessCallback<T> block) {
+    public static <T> void showResult(Context context, Response<T> resp, SuccessCallback<T> callback) {
         if (resp.success()) {
-            block.onSuccess(resp.getData());
+            callback.onSuccess(resp.getData());
         } else {
             ToastUtil.showToast(context,resp.getErrorMsg());
         }
