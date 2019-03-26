@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import cn.eric.basiclib.global.Configurator;
-import cn.eric.basiclib.utils.GsonUtil;
+import cn.eric.basiclib.utils.GsonContext;
 
 /**
  * Created by eric on 2019/3/24
@@ -31,7 +31,7 @@ public class ConfigManager {
         }
 
         String configJson = DQAcceleratorJni.decodeMjf(localConfigFile.getPath());
-        mConfigEntity = GsonUtil.getGson().fromJson(configJson, ConfigEntity.class);
+        mConfigEntity = GsonContext.getGson().fromJson(configJson, ConfigEntity.class);
     }
 
     private boolean copyConfigToLocal(File localConfigFile) {

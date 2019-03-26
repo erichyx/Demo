@@ -9,11 +9,11 @@ import cn.eric.myapplication.api.response.Response;
  */
 public class ResultUtil {
 
-    public interface SuccessBlock<T> {
+    public interface SuccessCallback<T> {
         void onSuccess(T data);
     }
 
-    public static <T> void showResult(Context context, Response<T> resp, SuccessBlock<T> block) {
+    public static <T> void showResult(Context context, Response<T> resp, SuccessCallback<T> block) {
         if (resp.success()) {
             block.onSuccess(resp.getData());
         } else {

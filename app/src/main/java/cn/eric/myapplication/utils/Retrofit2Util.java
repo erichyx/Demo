@@ -2,6 +2,7 @@ package cn.eric.myapplication.utils;
 
 import android.content.Context;
 
+import cn.eric.basiclib.utils.GsonContext;
 import cn.eric.basiclib.utils.OkHttp3Util;
 import cn.eric.myapplication.api.converter.MyConverterFactory;
 import cn.eric.basiclib.global.Configurator;
@@ -23,8 +24,8 @@ public class Retrofit2Util {
                     String baseUrl = Configurator.get().getBaseUrl();
                     sRetrofit = new Retrofit.Builder().baseUrl(baseUrl)
                             .client(OkHttp3Util.getOkHttpClient(context))
-                            .addConverterFactory(MyConverterFactory.create())
-                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(MyConverterFactory.create(GsonContext.getGson()))
+                            .addConverterFactory(GsonConverterFactory.create(GsonContext.getGson()))
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
                 }
