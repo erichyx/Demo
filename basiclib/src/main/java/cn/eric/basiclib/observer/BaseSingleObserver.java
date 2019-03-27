@@ -1,4 +1,4 @@
-package cn.eric.myapplication.api;
+package cn.eric.basiclib.observer;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.CompositeDisposable;

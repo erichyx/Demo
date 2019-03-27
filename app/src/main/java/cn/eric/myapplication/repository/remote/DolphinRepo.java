@@ -2,7 +2,7 @@ package cn.eric.myapplication.repository.remote;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import cn.eric.myapplication.api.BaseSingleObserver;
+import cn.eric.basiclib.observer.BaseSingleObserver;
 import cn.eric.myapplication.api.request.RequestProvider;
 import cn.eric.myapplication.api.request.ScreenAdReq;
 import cn.eric.myapplication.api.request.base.CommonRequest;
@@ -11,9 +11,8 @@ import cn.eric.myapplication.api.request.base.RequestParamFetcher;
 import cn.eric.myapplication.api.response.EncryptKeyResp;
 import cn.eric.myapplication.api.response.Response;
 import cn.eric.myapplication.api.response.ScreenAdResp;
-import cn.eric.myapplication.utils.ServiceGenerator;
+import cn.eric.basiclib.utils.ServiceGenerator;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by eric on 2019/3/24

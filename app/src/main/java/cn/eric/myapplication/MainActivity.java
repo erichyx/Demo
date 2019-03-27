@@ -4,11 +4,10 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.util.Log;
 import android.view.View;
 
-import cn.eric.basiclib.utils.ViewModelUtils;
 import cn.eric.myapplication.databinding.ActivityMainBinding;
 import cn.eric.basiclib.uicontroller.BaseActivity;
 import cn.eric.myapplication.utils.InjectorUtils;
-import cn.eric.myapplication.utils.ResultUtil;
+import cn.eric.myapplication.utils.ResultProcessor;
 import cn.eric.myapplication.utils.ToastUtil;
 import cn.eric.myapplication.viewmodel.MainViewModel;
 
@@ -22,7 +21,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected MainViewModel getViewModel() {
         ViewModelProvider.Factory viewModelFactory = InjectorUtils.provideMainViewModelFactory();
-        return ViewModelUtils.provideViewModel(this, viewModelFactory, MainViewModel.class);
+        return provideViewModel(viewModelFactory, MainViewModel.class);
     }
 
     @Override
@@ -33,13 +32,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void subscribeUi() {
         mViewModel.getEncryptKeyResult().observe(this, response -> {
-            ResultUtil.showResult(this, response, data -> {
+            ResultProcessor.showResult(this, response, data -> {
                 mViewDataBinding.tvResult.setText(data.getAuthKey());
             });
         });
 
         mViewModel.getScreenAdResult().observe(this, response -> {
-            ResultUtil.showResult(this, response, data -> {
+            ResultProcessor.showResult(this, response, data -> {
                 Log.d("dolphin", data.toString());
                 ToastUtil.showToast(this, "请求成功");
             });

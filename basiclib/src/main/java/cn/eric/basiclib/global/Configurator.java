@@ -7,19 +7,22 @@ import android.support.v4.util.SparseArrayCompat;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import retrofit2.Converter;
+
 /**
  * Created by eric on 2018/6/9
  */
 public final class Configurator {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({BASE_URL, APP_CONTEXT, IMG_REQUEST_OPTIONS})
+    @IntDef({BASE_URL, APP_CONTEXT, CONVERTER_FACTORY,IMG_REQUEST_OPTIONS})
     @interface ConfigKey {
     }
 
     private static final int BASE_URL = 0;
     private static final int APP_CONTEXT = 1;
-    private static final int IMG_REQUEST_OPTIONS = 2;
+    private static final int CONVERTER_FACTORY = 2;
+    private static final int IMG_REQUEST_OPTIONS = 3;
     private boolean isConfig = false;
 
     private static final SparseArrayCompat<Object> sConfigs = new SparseArrayCompat<>();
@@ -38,6 +41,11 @@ public final class Configurator {
 
     public Configurator appContext(Context appContext) {
         setConfig(APP_CONTEXT, appContext);
+        return this;
+    }
+
+    public Configurator convertFactory(Converter.Factory factory) {
+        setConfig(CONVERTER_FACTORY, factory);
         return this;
     }
 
@@ -62,6 +70,10 @@ public final class Configurator {
 
     public Context getAppContext() {
         return (Context) getConfig(APP_CONTEXT);
+    }
+
+    public Converter.Factory getConverterFactory() {
+        return (Converter.Factory) getConfig(CONVERTER_FACTORY);
     }
 
     public void configure() {

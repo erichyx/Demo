@@ -1,12 +1,8 @@
-package cn.eric.myapplication.utils;
+package cn.eric.basiclib.utils;
 
 import android.content.Context;
 
-import cn.eric.basiclib.utils.GsonContext;
-import cn.eric.basiclib.utils.OkHttp3Util;
-import cn.eric.myapplication.api.converter.MyConverterFactory;
 import cn.eric.basiclib.global.Configurator;
-import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -26,7 +22,7 @@ public class Retrofit2Util {
                     String baseUrl = Configurator.get().getBaseUrl();
                     sRetrofit = new Retrofit.Builder().baseUrl(baseUrl)
                             .client(OkHttp3Util.getOkHttpClient(context))
-                            .addConverterFactory(MyConverterFactory.create(GsonContext.getGson()))
+                            .addConverterFactory(Configurator.get().getConverterFactory())
                             .addConverterFactory(GsonConverterFactory.create(GsonContext.getGson()))
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                             .build();

@@ -2,6 +2,8 @@ package cn.eric.basiclib.uicontroller;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -29,8 +31,17 @@ public abstract class BaseActivity<B extends ViewDataBinding, VM extends ViewMod
         subscribeUi();
     }
 
-    abstract protected @LayoutRes int getLayoutId();
+    public <T extends ViewModel> T provideViewModel(ViewModelProvider.Factory factory, Class<T> modelClass) {
+        return ViewModelProviders.of(this, factory).get(modelClass);
+    }
+
+    abstract protected @LayoutRes
+    int getLayoutId();
+
     abstract protected VM getViewModel();
-    protected abstract @IdRes int getViewModelId();
+
+    protected abstract @IdRes
+    int getViewModelId();
+
     abstract protected void subscribeUi();
 }

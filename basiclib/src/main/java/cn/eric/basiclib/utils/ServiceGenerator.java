@@ -1,4 +1,4 @@
-package cn.eric.myapplication.utils;
+package cn.eric.basiclib.utils;
 
 
 import android.content.Context;
