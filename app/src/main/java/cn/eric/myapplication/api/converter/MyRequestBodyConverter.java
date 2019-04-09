@@ -23,7 +23,7 @@ public class MyRequestBodyConverter<T> implements Converter<T, RequestBody> {
 
     MyRequestBodyConverter(Gson gson, Type type) {
         this.gson = gson;
-        isEncryptKeyReq = EncryptKeyRequest.class.getTypeName().equals(type.getTypeName());
+        isEncryptKeyReq = type.getClass().isAssignableFrom(EncryptKeyRequest.class);
     }
 
     @Override
