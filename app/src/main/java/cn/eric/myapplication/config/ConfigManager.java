@@ -49,7 +49,7 @@ public class ConfigManager {
                     // 如果Configs.mejf文件不存在，拷贝到本地文件目录下
                     String localFilePath = appContext.getFilesDir().getAbsolutePath() + File.separator;
                     String configFile = localFilePath + CONFIG_FILE_NAME;
-                    boolean result = copyAssetFilesToLocal(CONFIG_FILE_NAME, configFile);
+                    boolean result = copyConfigFileToLocal(configFile);
                     if (!result) {
                         setDataState(DataState.STATE_ERROR);
                         return;
@@ -70,7 +70,7 @@ public class ConfigManager {
                     List<ConfigEntity.ComponentsBean> components = mConfigEntity.getComponents();
                     for (ConfigEntity.ComponentsBean component : components) {
                         // 拷贝指定文件到本地，如果本地存在则覆盖
-                        copyComponentFilesToLocal(component.getName(), localFilePath + component.getName());
+                        copyAssetFileToLocal(component.getName(), localFilePath + component.getName());
                     }
 
                     // Servers.mejf文件解码，反序列化
@@ -104,14 +104,14 @@ public class ConfigManager {
         }
     }
 
-    private boolean copyAssetFilesToLocal(String assetFileName, String filePath) {
+    private boolean copyConfigFileToLocal(String filePath) {
         if (!FileHelper.fileExists(filePath)) {
-            return FileHelper.copyFileInPackageToFile(assetFileName, filePath, false);
+            return FileHelper.copyFileInPackageToFile(CONFIG_FILE_NAME, filePath, false);
         }
         return true;
     }
 
-    private boolean copyComponentFilesToLocal(String assetFileName, String filePath) {
+    private boolean copyAssetFileToLocal(String assetFileName, String filePath) {
         if (!FileHelper.fileExists(filePath)) {
             return FileHelper.copyFileInPackageToFile(assetFileName, filePath, false);
         } else {
