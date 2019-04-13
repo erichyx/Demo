@@ -123,9 +123,9 @@ public class ConfigManager {
         int code1 = 0xc4;
         int code2 = 0x6a;
         long time = System.currentTimeMillis() / 1000;
-        long ime = ~((byte) time ^ code1) & code2;
+        int ime = ~((byte) time ^ code1) & code2;
         // fixme 版本号通过方法读取
-        int checkResult = DQAcceleratorJni.CheckClient((int)ime, "1.5.328");
+        int checkResult = DQAcceleratorJni.CheckClient(ime, "1.5.328");
         return checkResult >= 0;
     }
 
