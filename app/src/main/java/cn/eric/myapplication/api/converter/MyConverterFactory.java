@@ -10,7 +10,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 import cn.eric.myapplication.api.request.base.BaseRequest;
-import cn.eric.myapplication.api.request.base.CommonRequest;
 import cn.eric.myapplication.api.response.Response;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;

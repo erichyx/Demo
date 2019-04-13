@@ -21,6 +21,6 @@ public class DolphinApp extends Application {
                 .convertFactory(MyConverterFactory.create(GsonContext.getGson()))
                 .configure();
 
-//        ConfigManager.getInstance().initConfig();
+        ConfigManager.getInstance().initConfig(this);
     }
 }
